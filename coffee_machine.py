@@ -33,3 +33,26 @@ resources = {
     "milk": 200,
     "coffee": 100,
 }
+on = True
+while on:
+    choice = input("What would you like? (espresso/latte/capuccino): ").lower()
+    if choice == 'espresso':
+        print('make esspresso')
+    elif choice == 'latte':
+        print('make latte')
+    elif choice == 'capuccino':
+        print('make capuccino')
+    elif choice == 'report':
+        for key in resources:
+            map = {
+                'water': 'ml',
+                'milk': 'ml',
+                'coffee': 'g',
+                'money': '$'
+            }
+            if key != 'money':
+                print(f"{key}: {resources[key]}{map[key]}")
+            else:
+                print(f"{key}: {map[key]}{resources[key]}")
+    elif choice == 'off':
+        on = False
