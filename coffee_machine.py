@@ -1,7 +1,5 @@
 # 🚧 Coffee Machine Under Construction 🚧
 
-# TODO: Print a report of all the coffee machine resources.
-
 MENU = {
     "espresso": {
         "ingredients": {
@@ -30,8 +28,9 @@ MENU = {
 
 resources = {
     "water": 300,
-    "milk": 50,
+    "milk": 200,
     "coffee": 100,
+    "money": 0
 }
 
 
@@ -60,13 +59,27 @@ def check_resources(current_resources, selected_drink):
     # return "Sufficient resources on hand."
     return True
 
+
+def add_coins(quarters, dimes, nickels, pennies):
+    """Takes in coins, multiplies them by their respective value and then returns total money given by user."""
+    total = (quarters * .25) + (dimes * .10) + (nickels * .05) + (pennies * .01)
+    return f"${total}"
+
 machine_on = True
 while machine_on:
     choice = input("What would you like? (espresso/latte/capuccino): ").lower()
     if choice == 'espresso' or choice == 'latte' or choice == 'capuccino':
         sufficient_resources = check_resources(resources, MENU[choice])
         if sufficient_resources:
-            print(f'Making an order of {choice}')
+            # print(f'Making an order of {choice}')
+            print("Please insert coins.")
+            quarters = int(input("how many quarters?: "))
+            dimes = int(input("how many dimes?: "))
+            nickels = int(input("how many nickels?: "))
+            pennies = int(input("how many pennies?: "))
+
+            money = add_coins(quarters, dimes, nickels, pennies)
+            print(money)
     elif choice == 'report':
         map = {
             'water': 'ml',
