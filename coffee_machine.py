@@ -29,15 +29,40 @@ MENU = {
 }
 
 resources = {
-    "water": 300,
+    "water": 49,
     "milk": 200,
     "coffee": 100,
 }
+
+
+def check_resources(current_resources, selected_drink):
+    """Takes in a dictionary of resources and a dictionary of type of drink with ingredients and returns if there is sufficent resources to make it."""
+    water = current_resources['water']
+    milk = current_resources['milk']
+    coffee = current_resources['coffee']
+
+    ingredients = selected_drink['ingredients']
+
+    for key in ingredients:
+        if key == 'water':
+            if water < ingredients[key]:
+                return "Sorry, there is not enough water"
+        elif key == 'milk':
+            if milk < ingredients[key]:
+                return "Sorry, there is not enough milk"
+        elif key == 'coffee':
+            if coffee < ingredients[key]:
+                return "Sorry, there is not enough coffee"
+    
+    return "Sufficient resources on hand."
+
 on = True
 while on:
     choice = input("What would you like? (espresso/latte/capuccino): ").lower()
     if choice == 'espresso':
-        print('make esspresso')
+        # print('make esspresso')
+        drink = check_resources(resources, MENU["espresso"])
+        print(drink)
     elif choice == 'latte':
         print('make latte')
     elif choice == 'capuccino':
