@@ -29,8 +29,8 @@ MENU = {
 }
 
 resources = {
-    "water": 49,
-    "milk": 200,
+    "water": 300,
+    "milk": 50,
     "coffee": 100,
 }
 
@@ -46,38 +46,39 @@ def check_resources(current_resources, selected_drink):
     for key in ingredients:
         if key == 'water':
             if water < ingredients[key]:
-                return "Sorry, there is not enough water"
+                print("Sorry, there is not enough water.")
+                return False
         elif key == 'milk':
             if milk < ingredients[key]:
-                return "Sorry, there is not enough milk"
+                print("Sorry, there is not enough milk.")
+                return False
         elif key == 'coffee':
             if coffee < ingredients[key]:
-                return "Sorry, there is not enough coffee"
+                print("Sorry, there is not enough coffee.")
+                return False
     
-    return "Sufficient resources on hand."
+    # return "Sufficient resources on hand."
+    return True
 
-on = True
-while on:
+machine_on = True
+while machine_on:
     choice = input("What would you like? (espresso/latte/capuccino): ").lower()
-    if choice == 'espresso':
-        # print('make esspresso')
-        drink = check_resources(resources, MENU["espresso"])
-        print(drink)
-    elif choice == 'latte':
-        print('make latte')
-    elif choice == 'capuccino':
-        print('make capuccino')
+    if choice == 'espresso' or choice == 'latte' or choice == 'capuccino':
+        sufficient_resources = check_resources(resources, MENU[choice])
+        if sufficient_resources:
+            print(f'Making an order of {choice}')
     elif choice == 'report':
+        map = {
+            'water': 'ml',
+            'milk': 'ml',
+            'coffee': 'g',
+            'money': '$'
+        }
         for key in resources:
-            map = {
-                'water': 'ml',
-                'milk': 'ml',
-                'coffee': 'g',
-                'money': '$'
-            }
             if key != 'money':
                 print(f"{key}: {resources[key]}{map[key]}")
             else:
                 print(f"{key}: {map[key]}{resources[key]}")
     elif choice == 'off':
-        on = False
+        machine_on = False
+        
