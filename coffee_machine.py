@@ -52,15 +52,16 @@ def add_coins(quarters, dimes, nickels, pennies):
 
 
 def make_drink(money_given, choice_name, drink, resources_on_hand):
-    """Takes in money given by user and sees it if covers the cost of users desired drink, if so then updates coffee machine resources less ingredients needed for drink made and returns message."""
+    """Takes in money given by user and sees it if covers the cost of users desired drink,
+    if so then updates coffee machine resources less ingredients needed for drink and returns made drink."""
     if money_given >= drink['cost']:
+        resources_on_hand['money'] += drink['cost']
         change = money_given - drink['cost']
         print(f"Here is ${change} in change.")
         
         ingredients = drink['ingredients']
         for key in ingredients:
             resources_on_hand[key] = resources_on_hand[key] - ingredients[key]
-        resources_on_hand['money'] += drink['cost']
         return f"Here is your {choice_name} ☕️. "
     else:
         return "Sorry, that is not enough. Money refunded."
@@ -69,7 +70,7 @@ machine_on = True
 while machine_on:
     choice = input("What would you like? (espresso/latte/capuccino): ").lower()
     if choice == 'espresso' or choice == 'latte' or choice == 'cappuccino':
-        sufficient_resources = check_resources(resources, MENU[choice])
+        sufficient_resources = check_resources(MENU[choice])
         if sufficient_resources:
             print("Please insert coins.")
             quarters = float(input("how many quarters?: "))
