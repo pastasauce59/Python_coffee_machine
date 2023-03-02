@@ -32,29 +32,16 @@ resources = {
 }
 
 
-def check_resources(current_resources, selected_drink):
+def check_resources(selected_drink):
     """Takes in a dictionary of resources and a dictionary of type of drink with ingredients and returns if there is sufficent resources to make it."""
-    water = current_resources['water']
-    milk = current_resources['milk']
-    coffee = current_resources['coffee']
 
     ingredients = selected_drink['ingredients']
 
-    for key in ingredients:
-        if key == 'water':
-            if water < ingredients[key]:
-                print("Sorry, there is not enough water.")
-                return False
-        elif key == 'milk':
-            if milk < ingredients[key]:
-                print("Sorry, there is not enough milk.")
-                return False
-        elif key == 'coffee':
-            if coffee < ingredients[key]:
-                print("Sorry, there is not enough coffee.")
-                return False
+    for item in ingredients:
+        if resources[item] < ingredients[item]:
+            print(f"Sorry, there is not enough {item}.")
+            return False
     
-    # return "Sufficient resources on hand."
     return True
 
 
