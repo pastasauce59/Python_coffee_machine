@@ -33,7 +33,7 @@ resources = {
 
 
 def check_resources(selected_drink):
-    """Takes in a dictionary of resources and a dictionary of type of drink with ingredients and returns if there is sufficent resources to make it."""
+    """Takes in a dictionary of type of drink with it's ingredients and returns if there is sufficent resources in the coffee machine to make it."""
 
     ingredients = selected_drink['ingredients']
 
