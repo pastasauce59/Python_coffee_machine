@@ -56,7 +56,7 @@ def make_drink(money_given, choice_name, drink, resources_on_hand):
     if so then updates coffee machine resources less ingredients needed for drink and returns made drink."""
     if money_given >= drink['cost']:
         resources_on_hand['money'] += drink['cost']
-        change = money_given - drink['cost']
+        change = round(money_given - drink['cost'], 2)
         print(f"Here is ${change} in change.")
         
         ingredients = drink['ingredients']
